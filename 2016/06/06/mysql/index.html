@@ -3,30 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>hello | Sijun&#39;s Blog</title>
+  <title>mysql | Sijun&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Hi, I’m Sijun LiHi, I’m Sijun Li, a software engineer.
-This is my favorite comics:
-
-me:">
+  <meta name="description" content="Mysql create new account in Ubuntu14.04123456789101112131415$ sudo /etc/init.d/mysql stop$ sudo mysqld_safe --skip-grant-tables &amp;amp;$ mysql -uroot -pmysql&amp;gt; use mysqlmysql&amp;gt; insert into user(host">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hello">
-<meta property="og:url" content="http://sijunli.github.io/2016/06/06/Hello/index.html">
+<meta property="og:title" content="mysql">
+<meta property="og:url" content="http://sijunli.github.io/2016/06/06/mysql/index.html">
 <meta property="og:site_name" content="Sijun's Blog">
-<meta property="og:description" content="Hi, I’m Sijun LiHi, I’m Sijun Li, a software engineer.
-This is my favorite comics:
-
-me:">
-<meta property="og:image" content="http://7xtfb3.com2.z0.glb.clouddn.com/coder.jpg">
-<meta property="og:image" content="http://7xtfb3.com2.z0.glb.clouddn.com/me.jpg">
-<meta property="og:updated_time" content="2016-06-05T17:31:28.979Z">
+<meta property="og:description" content="Mysql create new account in Ubuntu14.04123456789101112131415$ sudo /etc/init.d/mysql stop$ sudo mysqld_safe --skip-grant-tables &amp;amp;$ mysql -uroot -pmysql&amp;gt; use mysqlmysql&amp;gt; insert into user(host">
+<meta property="og:updated_time" content="2016-06-05T17:31:39.116Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="hello">
-<meta name="twitter:description" content="Hi, I’m Sijun LiHi, I’m Sijun Li, a software engineer.
-This is my favorite comics:
-
-me:">
-<meta name="twitter:image" content="http://7xtfb3.com2.z0.glb.clouddn.com/coder.jpg">
+<meta name="twitter:title" content="mysql">
+<meta name="twitter:description" content="Mysql create new account in Ubuntu14.04123456789101112131415$ sudo /etc/init.d/mysql stop$ sudo mysqld_safe --skip-grant-tables &amp;amp;$ mysql -uroot -pmysql&amp;gt; use mysqlmysql&amp;gt; insert into user(host">
   
     <link rel="alternate" href="/atom.xml" title="Sijun&#39;s Blog" type="application/atom+xml">
   
@@ -79,9 +67,9 @@ me:">
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Hello" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-mysql" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/06/06/Hello/" class="article-date">
+    <a href="/2016/06/06/mysql/" class="article-date">
   <time datetime="2016-06-05T17:25:56.000Z" itemprop="datePublished">2016-06-06</time>
 </a>
     
@@ -93,7 +81,7 @@ me:">
         
   
     <h1 class="article-title" itemprop="name">
-      hello
+      mysql
     </h1>
   
 
@@ -101,19 +89,15 @@ me:">
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Hi-I’m-Sijun-Li"><a href="#Hi-I’m-Sijun-Li" class="headerlink" title="Hi, I’m Sijun Li"></a>Hi, I’m Sijun Li</h1><p>Hi, I’m Sijun Li, a software engineer.</p>
-<p>This is my favorite comics:</p>
-<p><img src="http://7xtfb3.com2.z0.glb.clouddn.com/coder.jpg" alt="Comics "></p>
-<p>me:</p>
-<p><img src="http://7xtfb3.com2.z0.glb.clouddn.com/me.jpg" alt="me"></p>
+        <h1 id="Mysql-create-new-account-in-Ubuntu14-04"><a href="#Mysql-create-new-account-in-Ubuntu14-04" class="headerlink" title="Mysql create new account in Ubuntu14.04"></a>Mysql create new account in Ubuntu14.04</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$ sudo /etc/init.d/mysql stop</span><br><span class="line">$ sudo mysqld_safe --skip-grant-tables &amp;</span><br><span class="line">$ mysql -uroot -p</span><br><span class="line"></span><br><span class="line">mysql&gt; use mysql</span><br><span class="line">mysql&gt; insert into user(host,user,password)  values(&apos;%&apos;,&apos;username&apos;,password(&apos;12345678&apos;));</span><br><span class="line"></span><br><span class="line">$ mysqladmin shutdown</span><br><span class="line">$ sudo /etc/init.d/mysql start</span><br><span class="line">$ mysql -uroot -p</span><br><span class="line"></span><br><span class="line">mysql&gt; grant all privileges on userdb.* to username@localhost;</span><br><span class="line">mysql&gt; flush privileges;</span><br><span class="line"></span><br><span class="line">$ sudo /etc/init.d/mysql restart</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://sijunli.github.io/2016/06/06/Hello/" data-id="cip2vnfnm0000xcj3oz0fabuz" class="article-share-link">Delen</a>
+      <a data-url="http://sijunli.github.io/2016/06/06/mysql/" data-id="cip2vnfo90001xcj3gz1kvxtb" class="article-share-link">Delen</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/personal/">personal</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/personal-learning/">personal, learning</a></li></ul>
 
     </footer>
   </div>
@@ -121,11 +105,15 @@ me:">
     
 <nav id="article-nav">
   
-  
-    <a href="/2016/06/06/mysql/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ouder</strong>
-      <div class="article-nav-title">mysql</div>
+    <a href="/2016/06/06/Hello/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Nieuwer</strong>
+      <div class="article-nav-title">
+        
+          hello
+        
+      </div>
     </a>
+  
   
 </nav>
 
