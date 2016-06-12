@@ -3,18 +3,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Mysql create new account in Ubuntu14.04 | Sijun&#39;s Blog</title>
+  <title>Tag: -wiki -flask -python | Sijun&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="123456789101112131415$ sudo /etc/init.d/mysql stop$ sudo mysqld_safe --skip-grant-tables &amp;amp;$ mysql -uroot -pmysql&amp;gt; use mysqlmysql&amp;gt; insert into user(host,user,password)  values(&amp;apos;%&amp;apos;,&amp;">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Mysql create new account in Ubuntu14.04">
-<meta property="og:url" content="http://sijunli.github.io/2016/06/06/mysql/index.html">
+  <meta name="description">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Sijun's Blog">
+<meta property="og:url" content="http://sijunli.github.io/tags/wiki-flask-python/index.html">
 <meta property="og:site_name" content="Sijun's Blog">
-<meta property="og:description" content="123456789101112131415$ sudo /etc/init.d/mysql stop$ sudo mysqld_safe --skip-grant-tables &amp;amp;$ mysql -uroot -pmysql&amp;gt; use mysqlmysql&amp;gt; insert into user(host,user,password)  values(&amp;apos;%&amp;apos;,&amp;">
-<meta property="og:updated_time" content="2016-06-11T18:58:12.853Z">
+<meta property="og:description">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mysql create new account in Ubuntu14.04">
-<meta name="twitter:description" content="123456789101112131415$ sudo /etc/init.d/mysql stop$ sudo mysqld_safe --skip-grant-tables &amp;amp;$ mysql -uroot -pmysql&amp;gt; use mysqlmysql&amp;gt; insert into user(host,user,password)  values(&amp;apos;%&amp;apos;,&amp;">
+<meta name="twitter:title" content="Sijun's Blog">
+<meta name="twitter:description">
   
     <link rel="alternate" href="/atom.xml" title="Sijun&#39;s Blog" type="application/atom+xml">
   
@@ -67,58 +66,39 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-mysql" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/06/06/mysql/" class="article-date">
-  <time datetime="2016-06-05T17:25:56.000Z" itemprop="datePublished">2016-06-06</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+        <section id="main">
   
-    <h1 class="article-title" itemprop="name">
-      Mysql create new account in Ubuntu14.04
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2016" class="archive-year">2016</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2016/06/13/flask-static/" class="archive-article-date">
+  <time datetime="2016-06-12T17:11:00.000Z" itemprop="datePublished">6月 13</time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2016/06/13/flask-static/">flask-static</a>
     </h1>
   
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$ sudo /etc/init.d/mysql stop</span><br><span class="line">$ sudo mysqld_safe --skip-grant-tables &amp;</span><br><span class="line">$ mysql -uroot -p</span><br><span class="line"></span><br><span class="line">mysql&gt; use mysql</span><br><span class="line">mysql&gt; insert into user(host,user,password)  values(&apos;%&apos;,&apos;username&apos;,password(&apos;12345678&apos;));</span><br><span class="line"></span><br><span class="line">$ mysqladmin shutdown</span><br><span class="line">$ sudo /etc/init.d/mysql start</span><br><span class="line">$ mysql -uroot -p</span><br><span class="line"></span><br><span class="line">mysql&gt; grant all privileges on userdb.* to username@localhost;</span><br><span class="line">mysql&gt; flush privileges;</span><br><span class="line"></span><br><span class="line">$ sudo /etc/init.d/mysql restart</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://sijunli.github.io/2016/06/06/mysql/" data-id="cipcus55500031cj32vn544zq" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/personal/">personal</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wiki/">wiki</a></li></ul>
-
-    </footer>
+    </header>
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2016/06/06/Hello/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Hello
-        
-      </div>
-    </a>
-  
-  
-</nav>
-
-  
 </article>
+  
+  
+    </div></section>
+  
 
 </section>
         
