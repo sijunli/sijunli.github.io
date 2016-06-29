@@ -68,6 +68,53 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-python-type" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/06/30/python-type/" class="article-date">
+  <time datetime="2016-06-29T17:23:39.000Z" itemprop="datePublished">2016-06-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/30/python-type/">Python中使用type()函数的使用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="type"><a href="#type" class="headerlink" title="type"></a>type</h1><p>python中type函数有两种用法，从pydoc中可以看到：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">type(object) -&gt; the object&apos;s type</span><br><span class="line">type(name, bases, dict) -&gt; a new type</span><br></pre></td></tr></table></figure>
+<p>第一种是返回参数的类型，常常用于在程序中判断参数类型用；第二种用法比较少见，使用来构建一种新的类型，用法跟class比较类似。</p>
+<p>在<a href="http://blog.jobbole.com/21351/" target="_blank" rel="external">深刻理解Python中的元类(metaclass)</a>一文中，对type给出了一种很深刻的理解。type起始也是一种python类，跟str、int、list、dict类或者我们自己定义的类等一样，这种类有两种构造方法，对应上述的两种type用法。type一个元类，或者说是类的类，也就是说它的实例是一个类，是大部分python内置类型都是type的实例。在python中class关键字构造类的时候，也是使用type来实现的。此文中还介绍到了__metaclass__关键字的用法，这个就比较高端了，以后在讨论。</p>
+<h1 id="用type实现动态继承"><a href="#用type实现动态继承" class="headerlink" title="用type实现动态继承"></a>用type实现动态继承</h1><p>“动态继承”这个词不一定准确，是在我使用flask_sqlalchemy模块进行数据库操作时。sqlalchemy提供了ORM模型，可以使用python中的class来跟数据库中的table对应，进行相关的CRUD操作，但是此时定义的model类需要继承自一个特殊的父类，这个父类需要先创建Flask实例，再从父类中产生包含数据库连接信息的db对象，再从db对象中获取这个特殊的父类（db.Model），这个做法跟面向接口编程的思想是不相符的。我希望在我定义model类的时候并不需要先实例化flask以及指定数据连接，也就是说我可以先定义model类，包括指定字段（对应到数据库表的字段）和成员函数，然后在再创建Flask实例时，让这些类继承自db.Model，实现动态的继承。</p>
+<p>当然，还有另一种方法就是从sqlalchemy的Base作为父类产生model类，也是一种比较好的思路的，但这里先不讨论。</p>
+<p>使用动态类继承的话，我们的代码就可以这样写：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> models</span><br><span class="line"><span class="keyword">from</span> new <span class="keyword">import</span> classobj</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getAllTables</span><span class="params">(app)</span>:</span></span><br><span class="line">    <span class="string">'''</span><br><span class="line">    app is Flask instance.</span><br><span class="line">    '''</span></span><br><span class="line">    app.config[<span class="string">'SQLALCHEMY_DATABASE_URI'</span>] = DB_URL</span><br><span class="line">    app.config[<span class="string">'SQLALCHEMY_TRACK_MODIFICATIONS'</span>] = <span class="keyword">True</span></span><br><span class="line">    db = SQLAlchemy(app)</span><br><span class="line"></span><br><span class="line">    Tables = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> models.__dict__.iteritems():</span><br><span class="line">        <span class="keyword">if</span> type(i[<span class="number">1</span>]) <span class="keyword">is</span> classobj:</span><br><span class="line">            tablename = i[<span class="number">0</span>]</span><br><span class="line">            Tables[tablename] = type(tablename, (db.Model,), i[<span class="number">1</span>].__dict__)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (db, type(<span class="string">"Tables"</span>, (), Tables))</span><br></pre></td></tr></table></figure>
+<p>models.py中定义了所有的model类，上述函数的作用是，遍历models.py中的所有类，并使用type构建一个新的类，使后者继承自db.Model。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://sijunli.github.io/2016/06/30/python-type/" data-id="ciq17bojl000494j35phbhu25" class="article-share-link">Delen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-vim-alt-key-map" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/06/15/vim-alt-key-map/" class="article-date">
@@ -107,7 +154,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://sijunli.github.io/2016/06/15/vim-alt-key-map/" data-id="cipili0pn0008rsj3f9653h46" class="article-share-link">Delen</a>
+      <a data-url="http://sijunli.github.io/2016/06/15/vim-alt-key-map/" data-id="ciq17bojx000894j3yex4zprh" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/personal/">personal</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vim/">vim</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wiki/">wiki</a></li></ul>
@@ -157,7 +204,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://sijunli.github.io/2016/06/13/grep-find-spec-files-in-dir/" data-id="cipili0ox0003rsj3vnood59k" class="article-share-link">Delen</a>
+      <a data-url="http://sijunli.github.io/2016/06/13/grep-find-spec-files-in-dir/" data-id="ciq17bojq000694j3c74868xu" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wiki/">wiki</a></li></ul>
@@ -196,7 +243,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://sijunli.github.io/2016/06/13/flask-static/" data-id="cipili0nz0001rsj3y8ljvc3v" class="article-share-link">Delen</a>
+      <a data-url="http://sijunli.github.io/2016/06/13/flask-static/" data-id="ciq17boix000194j36tgkukqb" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/flask/">flask</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wiki/">wiki</a></li></ul>
@@ -244,7 +291,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://sijunli.github.io/2016/06/12/usage-of-convmv/" data-id="cipili0pa0006rsj371vbv95r" class="article-share-link">Delen</a>
+      <a data-url="http://sijunli.github.io/2016/06/12/usage-of-convmv/" data-id="ciq17bok1000994j3r3s1biu9" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/apache/">apache</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wiki/">wiki</a></li></ul>
@@ -287,7 +334,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://sijunli.github.io/2016/06/06/Hello/" data-id="cipili0n60000rsj3a4zclwgf" class="article-share-link">Delen</a>
+      <a data-url="http://sijunli.github.io/2016/06/06/Hello/" data-id="ciq17boig000094j3n7f7edwt" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/personal/">personal</a></li></ul>
@@ -326,7 +373,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://sijunli.github.io/2016/06/06/mysql/" data-id="cipili0p30004rsj3bf5j1bcw" class="article-share-link">Delen</a>
+      <a data-url="http://sijunli.github.io/2016/06/06/mysql/" data-id="ciq17boji000394j31vko5av4" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wiki/">wiki</a></li></ul>
@@ -360,7 +407,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/flask/" style="font-size: 10px;">flask</a> <a href="/tags/linux/" style="font-size: 16.67px;">linux</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/personal/" style="font-size: 13.33px;">personal</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/wiki/" style="font-size: 20px;">wiki</a>
+      <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/flask/" style="font-size: 10px;">flask</a> <a href="/tags/linux/" style="font-size: 16.67px;">linux</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/personal/" style="font-size: 13.33px;">personal</a> <a href="/tags/python/" style="font-size: 13.33px;">python</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/wiki/" style="font-size: 20px;">wiki</a>
     </div>
   </div>
 
@@ -382,6 +429,10 @@
       <ul>
         
           <li>
+            <a href="/2016/06/30/python-type/">Python中使用type()函数的使用</a>
+          </li>
+        
+          <li>
             <a href="/2016/06/15/vim-alt-key-map/">如何在vim中添加Alt键开头的快捷键映射</a>
           </li>
         
@@ -395,10 +446,6 @@
         
           <li>
             <a href="/2016/06/12/usage-of-convmv/">如何在apache2上部署文件名为中文的网页</a>
-          </li>
-        
-          <li>
-            <a href="/2016/06/06/Hello/">Hello</a>
           </li>
         
       </ul>
